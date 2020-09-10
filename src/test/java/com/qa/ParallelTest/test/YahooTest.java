@@ -1,36 +1,57 @@
 package com.qa.ParallelTest.test;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.qa.ParalleTest.base.TestBase;
-import com.qa.ParalleTest.pages.Yahoo;
 
-public class YahooTest extends TestBase {
-	Yahoo ya;
+public class YahooTest {
+	TestBase tb;
+	WebDriver wy;
 
 	@BeforeMethod
 	void setup() {
-		initialisation("https://ca.yahoo.com/?p=us");
-		ya = new Yahoo();
+		
+		tb = TestBase.getTestBaseInstance();
+		
+		System.out.println("Instance of Yahoo class: " + tb);
+		wy = tb.initialisation();
+		wy.get("https://ca.yahoo.com/");
+
+		System.out.println("The close driver in yahoo test is wy :  " + wy);
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void logoTest() {
-		boolean flag = ya.logoMethod();
+		
+		
+
+		System.out.println("Logo Display Test og Yahoo");
+
+		WebElement elementOne = wy.findElement(By.id("header-logo"));
+		boolean flag = elementOne.isDisplayed();
 		Assert.assertTrue(flag);
 	}
 
+	@Test(priority = 2)
 	public void titleTest() {
-		String title = ya.getTitile();
+		
+		
+
+		System.out.println("Title Test of Yahoo");
+		String title = wy.getTitle();
 		Assert.assertEquals("Yahoo", title);
 	}
 
 	@AfterMethod
 	void TearDown() {
-		driver.quit();
+		System.out.println("The close driver in yahoo test is wy :  " + wy);
+		wy.quit();
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.qa.ParallelTest.test;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -9,34 +12,50 @@ import org.testng.annotations.Test;
 import com.qa.ParalleTest.base.TestBase;
 import com.qa.ParalleTest.pages.Bing;
 
-public class BingTest extends TestBase {
-	Bing bi;
+public class BingTest  {
+	TestBase tb;
+	WebDriver wb;
 
 	@BeforeMethod
 	void setup() {
+		
+		tb = TestBase.getTestBaseInstance();
+		
+		System.out.println("Instance of Bing class: " + tb);
+		wb = tb.initialisation();
+		wb.get("https://www.bing.com/");
 
-		initialisation("https://www.bing.com/");
-		bi = new Bing();
-	
+		System.out.println("The Open driver in Bing test is  wb:  " + wb);
 
 	}
 
-	@Test
+	@Test(priority = 1)
 	void logoMethodTest() {
+		
 	
-		boolean flag = bi.logoMethod();
+		
+		System.out.println("Logo Test of BING");
+
+		WebElement elementOne = wb.findElement(By.id("b_logo"));
+		boolean flag = elementOne.isDisplayed();
 		Assert.assertTrue(flag);
 
 	}
 
-	@Test
+	@Test(priority = 2)
 	void getitileTest() {
-		String tittle = bi.getitile();
+		
+	
+		
+		System.out.println("Title test oF BING");
+		String tittle = wb.getTitle();
 		Assert.assertEquals("Bing", tittle);
 	}
 
 	@AfterMethod
 	void TearDown() {
-		driver.quit();
+
+		System.out.println("The close driver in Bing test is wb:  " + wb);
+		wb.quit();
 	}
 }
