@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="com.qa.ParallelTest.test.YahooTest">
+        <methods>
+          <include name="TearDown"/>
+          <include name="setup"/>
+          <include name="logoTest"/>
+        </methods>
+      </class> <!-- com.qa.ParallelTest.test.YahooTest -->
+      <class name="com.qa.ParallelTest.test.BingTest">
+        <methods>
+          <include name="setup"/>
+          <include name="TearDown"/>
+          <include name="logoMethodTest"/>
+        </methods>
+      </class> <!-- com.qa.ParallelTest.test.BingTest -->
+      <class name="com.qa.ParallelTest.test.GoogleTest">
+        <methods>
+          <include name="LogoDisplayTest"/>
+          <include name="TearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.qa.ParallelTest.test.GoogleTest -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
